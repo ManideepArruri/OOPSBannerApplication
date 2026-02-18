@@ -1,21 +1,43 @@
-//OOPSBannerApp UC5 - Render OOPS as Banner using Inline Array Initialization
+//OOPSBannerApp UC6 - Render OOPS as Banner using functions
 //This use case extends UC4 by defining the array inline
-// This App displays a simple message on the console as OOPS using String.join() method and storing them in a String array
+// This App displays a simple message on the console as OOPS using different functions enhancing modularity
 // @author Developer
-// @version 5
+// @version 6
 
 class OOPSBannerApp{
 	public static void main(String[] args){
-		String[] lines = {
-		String.join(" ","  ***   "    ,"  ***    "  ,"***  " ,"  ****"),
-		String.join(" "," *   *  "    ," *   *   "  ,"*  * " ," *"),
-		String.join(" ","*     * "    ,"*     *  "  ,"***  " ,"****"),
-		String.join(" "," *   *  "    ," *   *   "  ,"*    " ,"   *"),
-		String.join(" ","  ***   "    ,"  ***    "  ,"*    " ,"****")
-        };
-		
-		for(String x:lines){
-			System.out.println(x);
-		}
+		String[] oPattern = getOPattern();
+        String[] pPattern = getPPattern();
+        String[] sPattern = getSPattern();
+        for(int i=0;i<oPattern.length;i++){
+            System.out.println(oPattern[i]+" "+oPattern[i]+" "+pPattern[i]+" "+sPattern[i]);
+        }
 	}
+    private static String[] getOPattern(){
+        return new String[]{
+        "  ***   ",
+		" *   *  ", 
+		"*     * ",  
+		" *   *  ", 
+		"  ***   "   
+        };
+    }
+    private static String[] getPPattern(){
+        return new String[]{
+        "***  " ,
+		"*  * " ,
+		"***  " ,
+		"*    ",
+		"*    "
+        };
+    }
+    private static String[] getSPattern(){
+        return new String[]{
+        "  ****",
+		" *",
+		"****",
+		"   *",
+		"****"
+        };
+    }
 }
