@@ -1,43 +1,63 @@
-//OOPSBannerApp UC6 - Render OOPS as Banner using functions
-//This use case extends UC4 by defining the array inline
+//OOPSBannerApp UC7 - Render OOPS as Banner using static class and explains the use of static and inner classes
 // This App displays a simple message on the console as OOPS using different functions enhancing modularity
 // @author Developer
-// @version 6
+// @version 7
 
 class OOPSBannerApp{
-	public static void main(String[] args){
-		String[] oPattern = getOPattern();
-        String[] pPattern = getPPattern();
-        String[] sPattern = getSPattern();
-        for(int i=0;i<oPattern.length;i++){
-            System.out.println(oPattern[i]+" "+oPattern[i]+" "+pPattern[i]+" "+sPattern[i]);
+    static class CharacterPatternMap{
+        char character;
+        String[] pattern;
+        CharacterPatternMap(char character,String[] pattern){
+            this.character = character;
+            this.pattern = pattern;
         }
-	}
-    private static String[] getOPattern(){
-        return new String[]{
+    }
+    public static CharacterPatternMap[] createCharacterPatternMaps(){
+        OOPSBannerApp.CharacterPatternMap[] charMaps = new OOPSBannerApp.CharacterPatternMap[26];
+        charMaps[14] = new CharacterPatternMap('O',new String[]{
         "  ***   ",
 		" *   *  ", 
 		"*     * ",  
 		" *   *  ", 
 		"  ***   "   
-        };
-    }
-    private static String[] getPPattern(){
-        return new String[]{
+        });
+        charMaps[15] = new CharacterPatternMap('P',new String[]{
         "***  " ,
 		"*  * " ,
 		"***  " ,
 		"*    ",
 		"*    "
-        };
-    }
-    private static String[] getSPattern(){
-        return new String[]{
+        });
+        charMaps[18] = new CharacterPatternMap('S',new String[]{
         "  ****",
 		" *",
 		"****",
 		"   *",
 		"****"
-        };
+        });
+        return charMaps;
     }
+    public static String[] getCharacterPattern(char ch,CharacterPatternMap[] charMaps){
+        return charMaps[ch-'A'].pattern;
+    }
+    public static void printMessage(String message,CharacterPatternMap[] charMaps){
+        int len = message.length();
+        String[][] ans = new String[len][5];
+        int i = 0;
+        for(char ch:message.toCharArray()){
+            ans[i++] = getCharacterPattern(ch,charMaps);
+        }
+        for(int j=0;j<5;j++){
+            for(int k=0;k<len;k++){
+                System.out.print(ans[k][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+	public static void main(String[] args){
+        CharacterPatternMap[] charMaps = createCharacterPatternMaps();
+        String message = "OOPS";
+        printMessage(message,charMaps);
+	}
 }
